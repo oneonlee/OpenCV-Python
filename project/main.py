@@ -1,11 +1,13 @@
 import cv2
 import numpy as np
-# import detect_simple as detect
+import detect_simple as detect
+import json
 import time
 start = time.time()  # 시작 시간 저장
  
-def car_detection(cap, parking_status_list):
-    return cap, parking_status_list
+def save_json(result_for_json):
+    with open("data.json", "w") as f:
+        json.dump(result_for_json, f)
 
 def roi_setting(img, idx, contour):
     mask = np.zeros_like(img, dtype='uint8')
@@ -49,37 +51,52 @@ def parking_slot_detection(init_img): # return parking_slot_dict
 
     return parking_slot_dict, contour
 
+def init_img_capture(img):
+    print("Processing \"init.png\" file ...")
+    # time.sleep(1)
+    cv2.imwrite("init.png", img)  # 파일이름(한글안됨), 이미지 
+    print("Done!")
+
 cap = cv2.VideoCapture("data/test2.mov")
-
+# cap = cv2.VideoCapture(1)
 ret, img = cap.read()     # 카메라로부터 현재 영상을 받아 img에 저장, 잘 받았다면 ret가 참
-print("Processing \"capture.png\" file ...")
-time.sleep(1)
-cv2.imwrite("init.png", img)  # 파일이름(한글안됨), 이미지 
-print("Done!")
 
+init_img_capture(img)
+
+init_img = cv2.imread('init.png')
+parking_slot_dict, contour = parking_slot_detection(init_img)
+print(f"총 주차 면 : {len(parking_slot_dict)}")
+
+count = 0
 # 무한루프
 while cap.isOpened():
+    cap.set(cv2.CAP_PROP_POS_FRAMES, count*50)
     ret, img = cap.read()     # 카메라로부터 현재 영상을 받아 img에 저장, 잘 받았다면 ret가 참
-    
-    if not ret:
+
+    if ret is False:
+        print("ret FALSE")
         break
 
-
-    init_img = cv2.imread('init.png')
-
-    parking_slot_dict, contour = parking_slot_detection(init_img)
-
+    detected_obj_list = []
+    result_for_json = [False for i in range(len(parking_slot_dict))]
+    i = 0
     for idx in parking_slot_dict:
         seprated_slot_img = roi_setting(img, idx, contour)
         parking_slot_dict[idx] = seprated_slot_img
-    
-    parking_status_list = []
-    for idx in parking_slot_dict:
-        car_detection(parking_slot_dict[idx], parking_status_list)
+
         cv2.imshow(f'{idx}', parking_slot_dict[idx])
-        # detect.main(parking_slot_dict[idx])
+        detect.detect(parking_slot_dict[idx], detected_obj_list)
+    
+        if detected_obj_list != []:
+            result_for_json[i]=True
+        i+=1
+
+        save_json(result_for_json)
 
     cv2.imshow('result', img)
+
+    count+=1
+
     if cv2.waitKey(1) == ord('q'):
         break
 
