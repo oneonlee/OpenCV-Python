@@ -70,11 +70,10 @@ print(f"총 주차 면 : {len(parking_slot_dict)}")
 count = 0
 # 무한루프
 while cap.isOpened():
-    cap.set(cv2.CAP_PROP_POS_FRAMES, count*50)
+    cap.set(cv2.CAP_PROP_POS_FRAMES, count*30)
     ret, img = cap.read()     # 카메라로부터 현재 영상을 받아 img에 저장, 잘 받았다면 ret가 참
 
     if ret is False:
-        print("ret FALSE")
         break
 
     detected_obj_list = []
@@ -85,12 +84,12 @@ while cap.isOpened():
         parking_slot_dict[idx] = seprated_slot_img
 
         cv2.imshow(f'{idx}', parking_slot_dict[idx])
-        detect.detect(parking_slot_dict[idx], detected_obj_list)
+        detected_obj_list = detect.detect(parking_slot_dict[idx], detected_obj_list)
     
-        if detected_obj_list != []:
+        if len(detected_obj_list) > 0 :
             result_for_json[i]=True
         i+=1
-
+        # print(result_for_json)
         save_json(result_for_json)
 
     cv2.imshow('result', img)
