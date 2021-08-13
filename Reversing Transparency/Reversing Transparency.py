@@ -11,13 +11,16 @@ overlay_img = cv2.imread('ship.png', cv2.IMREAD_UNCHANGED)
 
 overlay_img_h, overlay_img_w, overlay_img_c = overlay_img.shape
 
-background_img = np.zeros((overlay_img_h, overlay_img_w, 3), dtype=np.uint8)
-background_img[:] = (value_b, value_g, value_r)
+background_img = np.zeros((overlay_img_h, overlay_img_w, 4), dtype=np.uint8)
+background_img[:] = (value_b, value_g, value_r, 254)
+
+result_img = background_img
 
 overlay_alpha = overlay_img[:, :, 3:] / 255.0
 background_alpha = 1.0 - overlay_alpha
 
-background_img[:, :] = overlay_alpha * overlay_img[:, :, :3] + background_alpha * background_img[:, :]
+result_img[:, :] = background_alpha * background_img[:, :, :4]
 
 cv2.imshow("img", background_img)
+cv2.imwrite('result.png', result_img)
 cv2.waitKey(0)
