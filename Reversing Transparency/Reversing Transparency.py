@@ -12,7 +12,7 @@ overlay_img = cv2.imread('ship.png', cv2.IMREAD_UNCHANGED)
 overlay_img_h, overlay_img_w, overlay_img_c = overlay_img.shape
 
 background_img = np.zeros((overlay_img_h, overlay_img_w, 4), dtype=np.uint8)
-background_img[:] = (value_b, value_g, value_r, 254)
+background_img[:] = (value_b, value_g, value_r, 255)
 
 result_img = background_img
 
