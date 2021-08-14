@@ -17,3 +17,83 @@
 ---
 
 Made by Lee Dong-geon, 2021. 08. 14.
+
+## Application
+
+![](application.gif)
+
+### HTML Code
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="test.css">
+</head>
+
+<body>
+    <span id="out_div">
+        <span id="in_div">
+        </span>
+        <img class="ship-icon" src="src/result.png" alt="Cargo Ship">
+    </span>
+</body>
+
+</html>
+```
+
+### CSS Code
+```css
+*{margin:0;padding:0;}
+
+body {
+  height: 100vh;
+  margin: 0;
+  background: rgba(244, 244, 244);
+}
+
+#out_div {
+    display: inline-block;
+    position:absolute;
+    text-align: center;
+    margin: 0 auto;
+    
+    height: 30vmin;
+    width: 30vmin;
+
+    top:10%;
+    left: 50%; 
+    transform: translateX(-50%);
+}
+
+#in_div {
+    background: linear-gradient(90deg, #a95654 80%, #ffffff 20%);
+    height: 28vmin;
+    width: 28vmin;
+    position:relative;
+
+    bottom:1vmin;
+    left:1vmin;
+
+    text-align: center;
+    display: block;
+
+    text-align: center;
+    white-space: nowrap;
+}
+
+img {
+    position: relative;
+    height: 30vmin;
+    width: 30vmin;
+    bottom: 30vmin;
+    display: block; 
+    margin: 0px auto; 
+    z-index: 999;
+
+}
+```
