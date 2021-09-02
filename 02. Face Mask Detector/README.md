@@ -12,3 +12,28 @@
 
 - 얼굴 영역 탐지 모델 & 마스크 판단 모델 다운로드
   - [models.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/03cac2ba-9c9d-4ce7-b77f-4c2ffb79fdea/models.zip)
+
+## 패키지 불러오기
+
+main.py 에 아래 코드를 작성합니다.
+
+- 패키지 로드하기
+
+  ```python
+  from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
+  from tensorflow.keras.models import load_model
+  import numpy as np
+  import cv2
+  ```
+## 모델 로드하기
+
+얼굴 영역 탐지 모델과 마스크 판단 모델을 각각 로드해봐요.
+
+- 모델 로드하기
+
+  ```python
+  facenet = cv2.dnn.readNet('models/deploy.prototxt', 'models/res10_300x300_ssd_iter_140000.caffemodel')
+  model = load_model('models/mask_detector.model')
+  ```
+
+  facenet 이 얼굴 영역 탐지 모델이고 model 이 마스크 판단 모델이에요.
