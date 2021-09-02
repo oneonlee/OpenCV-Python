@@ -12,3 +12,8 @@
   - [eccv16.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/0f83d3b6-bf70-4fad-8e8f-5094efd82345/eccv16.zip)
 - instance_norm 폴더
   - [instance_norm.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/c7e9f91d-ff83-4724-a027-6316199fac41/instance_norm.zip)
+
+## 딥러닝 모델 로드
+```python
+net = cv2.dnn.readNetFromTorch('models/eccv16/starry_night.t7')
+```
