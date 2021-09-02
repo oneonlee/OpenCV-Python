@@ -1,8 +1,8 @@
 # 얼굴인식 인공지능 스노우 앱 만들기
 ![](https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb358780e-446a-4527-842c-bda824df9c03%2FUntitled.png?table=block&id=66a8a63e-abf9-495e-9eba-81871f39e03d&spaceId=83c75a39-3aba-4ba4-a792-7aefe4b07895&width=1340&userId=&cache=v2)
 
-## 프로젝트 출처
-- [http://dlib.net/face_landmark_detection.py.html](http://dlib.net/face_landmark_detection.py.html)
+## 관련 논문
+- [Colorful Image Colorization](https://arxiv.org/pdf/1603.08511.pdf)
 
 ## 랜드마크
 랜드마크는 얼굴의 눈, 코 좌표를 뜻합니다. 양 눈의 끝 좌표와 코 끝의 좌표를 자동으로 알아내서 안경을 씌워보고 돼지코도 만들어봅시다!
@@ -30,7 +30,6 @@
 
     랜드마크 좌표는 shape.parts() 에 눈, 코 순서로 저장됩니다. 랜드마크 좌표를 그려보기위해 `cv2.circle()`로 점을 그리고 `cv2.putText()`를 사용하여 순서대로 숫자를 표시했습니다.
 
-    ![](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/1cd6bb2a-4837-4a8c-ae9f-3c32bcdd2a2f/Untitled.png)
     ![image](https://user-images.githubusercontent.com/73745836/131890045-a32e3f13-18bc-4162-855b-c8e2e348ae02.png)
     위의 결과를 보시면 
 
