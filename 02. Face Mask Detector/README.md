@@ -12,7 +12,3 @@
 
 - 얼굴 영역 탐지 모델 & 마스크 판단 모델 다운로드
   - [models.zip](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/03cac2ba-9c9d-4ce7-b77f-4c2ffb79fdea/models.zip)
-
-## 영상 다운로드
-
-- [04.mp4](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/69a9c634-8ab5-4dd9-a81b-33af80d4742b/04.mp4)
